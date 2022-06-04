@@ -11,19 +11,16 @@ class SessionsController < ApplicationController
           session[:name] = session_params[:name]
           redirect_to("/")
         else
-          redirect_to(:login)
+          redirect_to(login_path)
         end
       else
-        redirect_to(:login)
+        redirect_to(login_path)
       end
     else
-      flash[:alert] = "Please log out before creating a new account!"
-      redirect_to(:login)
+      # flash[:alert] = "Please log out before creating a new account!"
+      # redirect_to(login_path)
+      redirect_to(:root)
     end
-  end
-
-  def login
-    render(:new)
   end
 
   def destroy
@@ -40,7 +37,7 @@ class SessionsController < ApplicationController
   def check_login
     if !logged_in?
       flash[:alert] = "Please log in!"
-      redirect_to(:login)
+      redirect_to(login_path)
     end
   end
 
